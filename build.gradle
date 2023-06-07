@@ -11,7 +11,7 @@ repositories {
 }
 
 group = "org.embulk"
-version = "0.11.0-SNAPSHOT"
+version = "0.11.0"
 description = "Formats CSV files for other file output plugins."
 
 configurations {
