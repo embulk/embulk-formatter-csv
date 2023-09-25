@@ -31,6 +31,7 @@ import org.embulk.spi.Page;
 import org.embulk.spi.PageOutput;
 import org.embulk.spi.PageReader;
 import org.embulk.spi.Schema;
+import org.embulk.spi.json.JsonValue;
 import org.embulk.spi.type.TimestampType;
 import org.embulk.util.config.Config;
 import org.embulk.util.config.ConfigDefault;
@@ -39,7 +40,6 @@ import org.embulk.util.config.Task;
 import org.embulk.util.text.LineEncoder;
 import org.embulk.util.text.Newline;
 import org.embulk.util.timestamp.TimestampFormatter;
-import org.msgpack.value.Value;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -214,7 +214,7 @@ public class CsvFormatterPlugin implements FormatterPlugin {
                             public void jsonColumn(Column column) {
                                 addDelimiter(column);
                                 if (!pageReader.isNull(column)) {
-                                    Value value = pageReader.getJson(column);
+                                    final JsonValue value = pageReader.getJsonValue(column);
                                     addValue(value.toJson());
                                 } else {
                                     addNullString();
